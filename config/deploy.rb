@@ -1,4 +1,4 @@
-require 'bundler/capistrano'
+# require 'bundler/capistrano'
 
 set :application, "sc2progress"
 set :repository,  "git://github.com/keikun17/sc2progress.git"
