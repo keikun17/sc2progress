@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
-gem 'sc2ranks', :git => 'git://github.com/Kelsin/sc2ranks.git'  
+gem 'sc2ranks', :git => 'git://github.com/keikun17/sc2ranks.git'  
+gem 'rake', '0.8.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -27,9 +28,15 @@ gem 'ruby-debug19'
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
-# group :development, :test do
-# end
+group :development do
+  gem "nifty-generators"
+end
+
+group :test do 
+ gem "mocha"
+end
 # 
 # 
 # group :production do
 # end
+gem "mocha", :group => :test

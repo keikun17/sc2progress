@@ -1,0 +1,27 @@
+<% title "Strategies" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Range Low</th>
+    <th>Range High</th>
+    <th>League</th>
+    <th>Race</th>
+    <th>Play Style</th>
+  </tr>
+  <% for strategy in @strategies %>
+    <tr>
+      <td><%= strategy.name %></td>
+      <td><%= strategy.range_low %></td>
+      <td><%= strategy.range_high %></td>
+      <td><%= strategy.league %></td>      
+      <td><%= strategy.race %></td>
+      <td><%= strategy.play_style %></td>
+      <td><%= link_to "Show", strategy %></td>
+      <td><%= link_to "Edit", edit_strategy_path(strategy) %></td>
+      <td><%= link_to "Destroy", strategy, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Strategy", new_strategy_path %></p>

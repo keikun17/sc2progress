@@ -1,0 +1,41 @@
+<%= form_for @strategy do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :race %><br />
+    <%= f.select :race, options_for_select(Strategy::RACES) %>
+  </p>
+  <p>
+    <%= f.label :range_low %><br />
+    <%= f.text_field :range_low %>
+  </p>
+  <p>
+    <%= f.label :range_high %><br />
+    <%= f.text_field :range_high %>
+  </p>
+  <p>
+    <%= f.label :league %>
+    <%= f.select :league, options_for_select(Strategy::DIVISIONS)%>
+  </p>  
+  <p>
+    <%= f.label :play_style %><br />
+    <%= f.text_field :play_style %>
+  </p>
+  
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :build_order %><br />
+    <%= f.text_area :build_order %>
+  </p>
+  <p>
+    <%= f.label :link %><br />
+    <%= f.text_field :link %>
+  </p>  
+  <p><%= f.submit %></p>
+<% end %>

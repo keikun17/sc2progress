@@ -1,1 +1,75 @@
-<%= @character.inspect %>
+<%#= @character.inspect %>
+<%= form_tag ('/'), :method => 'post' do %>
+Battle.net Profile URL <%= text_field_tag 'bnet_url' %>
+<%= submit_tag "Submit" %>
+<% end%>
+<div>
+  <br>
+  Name : <%= @character.name %>
+  <br>
+  Character Code : <%= @character.character_code %>
+  <br>
+  Region : <%= @character.region %>
+  <br>
+  BNET ID : <%= @character.bnet_id %>
+  <br>
+</div>
+<br>
+<% if @character.team(1) %>
+  <div style="border:1px solid black">
+    <strong>1v1</strong>
+    <br>
+    Division : <%= @character.team(1).division %>
+    <br>
+    Division Rank : <%= @character.team(1).division_rank %>
+    <br>
+    Points : <%= @character.team(1).points %>
+    <br>
+    Wins : <%= @character.team(1).wins %>
+    <br>
+    Losses : <%= @character.team(1).losses %>
+    <br>
+    W/L Ratio : <%= @character.team(1).ratio %>
+    <br>
+    World Rank : <%= @character.team(1).world_rank %>
+    <br>
+    League : <%= @character.team(1).league%>
+    <br>
+    Race : <%= @character.team(1).fav_race %>
+    <br>
+    <br>
+    <strong>Recommended Build Orders for your Division and Score</strong>
+    <ul>
+    <% @t1strategies.each do |strategy| %>
+      <li><%= link_to strategy.name, strategy_path(strategy) %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @character.team(2) %>
+  <% @character.team(2).each do |team| %>
+    <div style="border:1px solid black">
+      <strong>2V2</strong>
+      <br>
+      Division : <%= team.division %>
+      <br>
+      Division Rank : <%= team.division_rank %>
+      <br>
+      Points : <%= team.points %>
+      <br>
+      Wins : <%= team.wins %>
+      <br>
+      Losses : <%= team.losses %>
+      <br>
+      W/L Ratio : <%= team.ratio %>
+      <br>
+      World Rank : <%= team.world_rank %>
+      <br>
+      League : <%= team.league%>
+      <br>
+      Race : <%= team.fav_race %>
+      <br>
+    </div>
+  <% end %>
+<% end %>

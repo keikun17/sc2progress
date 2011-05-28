@@ -1,0 +1,45 @@
+<% title "Strategy" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @strategy.name %>
+</p>
+<p>
+  <strong>Race:</strong>
+  <%= @strategy.race %>
+</p>
+<p>
+  <strong>League</strong>
+  <%= @strategy.league %>
+</p>
+<p>
+  <strong>Range Low:</strong>
+  <%= @strategy.range_low %>
+</p>
+<p>
+  <strong>Range High:</strong>
+  <%= @strategy.range_high %>
+</p>
+<p>
+  <strong>Link:</strong>
+  <%= @strategy.link %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=simple_format @strategy.description %>
+</p>
+<p>
+  <strong>Build Order:</strong>
+  <%=simple_format @strategy.build_order %>
+</p>
+
+<p>
+  <strong>Play Style:</strong>
+  <%= @strategy.play_style %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_strategy_path(@strategy) %> |
+  <%= link_to "Destroy", @strategy, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", strategies_path %>
+</p>
