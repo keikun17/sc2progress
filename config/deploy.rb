@@ -1,22 +1,44 @@
-set :application, "set your application name here"
-set :repository,  "set your repository location here"
+set :application, "sc2progress"
+set :repository,  "git://github.com/keikun17/sc2progress.git"
 
-set :scm, :subversion
+set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+server "malayancolleges.com", :app, :web, :db, :primary => true
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+set :user, "deploy"
+set :user, "deploy"
+set :ssh_options, { :forward_agent => true }
+set :use_sudo, false
+set :deploy_to, "/opt/apps/#{application}"
+set :rails_env, "production"
+namespace :deploy do
+  task :start do ; end
+  task :stop do ; end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+end
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+# bundler
+namespace :bundler do
+  task :install do
+    run("gem install bundler --source=http://gemcutter.org")
+  end
+  
+  task :symlink_vendor do
+  shared_gems = File.join(shared_path, 'vendor/bundler_gems')
+  release_gems = "#{release_path}/vendor/bundler_gems/"
+    %w(cache gems specifications).each do |sub_dir|
+      shared_sub_dir = File.join(shared_gems, sub_dir)
+      run("mkdir -p #{shared_sub_dir} && mkdir -p #{release_gems} && ln -s #{shared_sub_dir} #{release_gems}/#{sub_dir}")
+    end
+  end
 
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+  task :bundle_new_release do
+    bundler.symlink_vendor
+    rails_env = variables[:rails_env] || 'production'
+    run("cd #{release_path} && gem bundle --only #{rails_env}")
+  end
+end
+
+after 'deploy:update_code', 'bundler:bundle_new_release'
