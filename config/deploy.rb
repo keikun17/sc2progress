@@ -1,3 +1,5 @@
+require 'bundler/capistrano'
+
 set :application, "sc2progress"
 set :repository,  "git://github.com/keikun17/sc2progress.git"
 
@@ -6,7 +8,8 @@ set :scm, :git
 server "malayancolleges.com", :app, :web, :db, :primary => true
 
 set :user, "deploy"
-set :user, "deploy"
+set :password, "t3n3n!"
+
 set :ssh_options, { :forward_agent => true }
 set :use_sudo, false
 set :deploy_to, "/opt/apps/#{application}"
@@ -37,8 +40,9 @@ namespace :bundler do
   task :bundle_new_release do
     bundler.symlink_vendor
     rails_env = variables[:rails_env] || 'production'
-    run("cd #{release_path} && gem bundle --only #{rails_env}")
+    run("cd #{release_path} && bundle install --only #{rails_env}")
   end
+  
 end
 
 after 'deploy:update_code', 'bundler:bundle_new_release'
