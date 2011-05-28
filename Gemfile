@@ -33,6 +33,6 @@ gem 'capistrano'
 gem 'sc2ranks', :git => 'git://github.com/Kelsin/sc2ranks.git'
 gem 'ruby-debug19'
 
-gem :production do
+group :production do
 
 end
