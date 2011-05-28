@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.3'
+gem 'sc2ranks', :git => 'git://github.com/Kelsin/sc2ranks.git'  
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -27,6 +28,7 @@ gem 'capistrano'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'linecache19'
   gem 'ruby-debug19'
 end
 
