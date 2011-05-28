@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.3'
 gem 'sc2ranks', :git => 'git://github.com/keikun17/sc2ranks.git'  
 gem 'rake', '0.8.7'
+gem "mocha"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -32,11 +33,7 @@ group :development do
   gem "nifty-generators"
 end
 
-group :test do 
- gem "mocha"
-end
 # 
 # 
 # group :production do
 # end
-gem "mocha", :group => :test
